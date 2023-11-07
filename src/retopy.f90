@@ -56,7 +56,8 @@ do t=1,42
     outvar(13:22,n)=zk(i-10:i-1,2)
     outvar(23:32,n)=mk(i-10:i-1,1)
     outvar(33:42,n)=mk(i-10:i-1,2)
-
+   
+    n=n+1
   enddo
 
 enddo
