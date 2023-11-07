@@ -62,5 +62,11 @@ do t=1,42
 enddo
 
 
+fname="./train_data/zm_10days_data.dat"
+open(10,file=trim(fname),access="direct",recl=42)
+do i=1,tnt-10*42
+  write(10,rec=i) outvar(:,i)
+enddo
+close(10)
 
 end program retopy 
