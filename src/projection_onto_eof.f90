@@ -273,7 +273,7 @@ do t=1,42
     tmp1d(1:121)=mp(is:ie,j)
     dum1=sum(tmp1d(1:121),1)/real(nt)
     dum2=sqrt(sum((tmp1d(1:121)-dum1)**2.,1)/real(nt))
-    mp(is:ie,j)=0.5*(tmp1d(1:121)-dum1)/dum2
+    mp(is:ie,j)=(tmp1d(1:121)-dum1)/dum2
     !if (j==10) write(*,*) dum1,dum2
   enddo
 enddo 
