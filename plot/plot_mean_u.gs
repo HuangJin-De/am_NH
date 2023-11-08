@@ -64,8 +64,10 @@
 
 "set xlabs |||||||"
 "set parea 1.2 10 6.6 8"
-"set vrange -1.5 2"
-"set ylevs -1 0 1"
+"set ylpos 0 l"
+"set ylopts 1 0.15 15"
+"set vrange -2 3"
+"set ylevs -1 0 1 2"
 "set cmark 0"
 "set ccolor 1"
 "set cthick 15"
@@ -73,7 +75,16 @@
 "set cmark 0"
 "set cthick 16"
 "set ccolor 2"
-"d mean(mean(emc,z=1,z=121),t=1,t=42)"
+"d mean(mean(emc*p,z=1,z=121),t=1,t=42)"
+
+"set ylpos 0 r"
+"set ylopts 11 0.15 15"
+"set vrange -5 20"
+"set ylevs  0 5 10 15"
+"set cmark 0"
+"set cthick 16"
+"set ccolor 11"
+"d mean(mean(u,z=1,z=121),t=1,t=42)"
 
 
 "set string 1 c 15 0"
