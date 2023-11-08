@@ -137,7 +137,7 @@ do t=1,42
     tmp(1:nt/2,m)=fin(nt/2+2:nt)
     tmp(nt/2+1:nt,m)=fin(1:nt/2+1)
 
-    fcoe=mn*conjg(zn)
+    fcoe=abs(mn)**2
     call fftw_execute_dft_c2r(plan_backward,fcoe,fin)
     fin=fin/real(nt)**2
 
