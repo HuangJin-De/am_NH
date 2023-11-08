@@ -65,7 +65,7 @@
 "set xlabs |||||||"
 "set parea 1.2 10 6.6 8"
 "set ylpos 0 l"
-"set ylopts 1 0.15 15"
+"set ylopts 1 15 0.15"
 "set vrange -2 3"
 "set ylevs -1 0 1 2"
 "set cmark 0"
@@ -78,7 +78,7 @@
 "d mean(mean(emc*p,z=1,z=121),t=1,t=42)"
 
 "set ylpos 0 r"
-"set ylopts 11 0.15 15"
+"set ylopts 11 15 0.15"
 "set vrange -5 20"
 "set ylevs  0 5 10 15"
 "set cmark 0"
@@ -100,6 +100,6 @@
 "draw string 5.6 8.2 Mean zonal wind and eddy flux [DJFM]"
 
 "printim ./figure/mean.png x2048 y1536"
-"c"
+*"c"
 
 
