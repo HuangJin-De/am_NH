@@ -3,7 +3,7 @@ options yrev
 title era5 spectrum
 undef -99999.
 xdef 1   linear 0.3125  0.625
-ydef 121 linear -61 1
+ydef 121 linear -60 1
 zdef 10  linear 0 1
 TDEF 42 linear 00:00Z01JAN1979 1yr
 vars 7
