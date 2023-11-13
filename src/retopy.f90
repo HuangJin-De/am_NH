@@ -81,6 +81,9 @@ close(10)
 
 nt=121
 
+deallocate(outvar)
+allocate(outvar(84,tnt-42*20))
+
 n=1
 do t=1,42
   ts=(t-1)*nt+1
@@ -89,14 +92,11 @@ do t=1,42
   zk=zp(ts:te,1:2)
   mk=mp(ts:te,1:2)
 
-  do i=11,121
-    outvar(1,n)=mk(i,1)
-    outvar(2,n)=mk(i,2)
-
-    outvar(3:12,n)=zk(i-10:i-1,1)
-    outvar(13:22,n)=zk(i-10:i-1,2)
-    outvar(23:32,n)=mk(i-10:i-1,1)
-    outvar(33:42,n)=mk(i-10:i-1,2)
+  do i=21,121
+    outvar(1:21,n)=zk(i-20:i,1)
+    outvar(22:42,n)=zk(i-20:i,2)
+    outvar(43:63,n)=mk(i-20:i,1)
+    outvar(64:84,n)=mk(i-20:i,2)
 
     n=n+1
   enddo
@@ -104,9 +104,9 @@ do t=1,42
 enddo
 
 
-fname="./train_data/zm_10days_ori_data.dat"
-open(10,file=trim(fname),access="direct",recl=42)
-do i=1,tnt-10*42
+fname="./train_data/zm_21days_ori_data.dat"
+open(10,file=trim(fname),access="direct",recl=84)
+do i=1,tnt-42*20
   write(10,rec=i) outvar(:,i)
 enddo
 close(10)
