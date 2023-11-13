@@ -257,6 +257,13 @@ enddo
 !  !if (j==1) write(*,*) mm(j),mv(j)
 !enddo
 
+fname="./data/ERA5_z_m_ori_data.dat"
+open(10,file=trim(fname),access="direct",recl=20)
+do t=1,tnt
+  write(10,rec=t) zp(t,:),mp(t,:)
+enddo
+close(10)
+
 nt=121
 deallocate(tmp1d)
 allocate(tmp1d(nt))
