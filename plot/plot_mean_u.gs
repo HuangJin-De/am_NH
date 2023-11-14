@@ -33,6 +33,7 @@
 "define um=mean(u,t=1,t=5082)"
 
 "set gxout contour"
+"set cstyle 1"
 "set clevs 5 10 15 20 25 30"
 "set cthick 16"
 "set clab masked"
@@ -53,10 +54,12 @@
 "set cstyle 2"
 "set clab masked"
 "d um"
+"set cstyle 1"
 
 "close 1"
 
 "open ../gs_ctl/int.ctl"
+"set cstyle 1"
 
 "set z 1"
 "set t 1"
@@ -75,7 +78,7 @@
 "set cmark 0"
 "set cthick 16"
 "set ccolor 2"
-"d mean(mean(emc*p,z=1,z=121),t=1,t=42)"
+"d mean(mean(emc,z=1,z=121),t=1,t=42)"
 
 "set ylpos 0 r"
 "set ylopts 11 15 0.15"

@@ -1,4 +1,4 @@
-dset ^../data/ERA5_z_m_data.dat
+dset ^../data/ERA5_z_m_ori_data.dat
 title monthly data regressed to PCs
 undef -99999.
 xdef 1   linear 0.3125  0.625
