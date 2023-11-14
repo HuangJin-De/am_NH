@@ -188,9 +188,12 @@ do t=1,tnt
   enddo
   
   tmp1d=0.
-  tmp1d(1:sny-1)=0.5*(intemca(1:sny-1,t)*cos(slat(1:sny-1)*d2r)**2. &
-                     +intemca(2:sny  ,t)*cos(slat(2:sny  )*d2r)**2.)
-  intemca(2:sny-1,t)=(tmp1d(2:sny-1)-tmp1d(1:sny-2))/(slat(2:sny-1)-slat(1:sny-2))/a &
+  !tmp1d(1:sny-1)=0.5*(intemca(1:sny-1,t)*cos(slat(1:sny-1)*d2r)**2. &
+  !                   +intemca(2:sny  ,t)*cos(slat(2:sny  )*d2r)**2.)
+  !intemca(2:sny-1,t)=(tmp1d(2:sny-1)-tmp1d(1:sny-2))/(slat(2:sny-1)-slat(1:sny-2))/a &
+  !                    /cos(slat(2:sny-1)*d2r)**2
+  tmp1d=intemca(:,t)*cos(slat*d2r)**2.
+  intemca(2:sny-1,t)=(tmp1d(3:sny)-tmp1d(1:sny-2))/(slat(3:sny)-slat(1:sny-2))/d2r/a &
                       /cos(slat(2:sny-1)*d2r)**2
   intemca(1,t)=0.
   intemca(sny,t)=0.
@@ -198,9 +201,12 @@ do t=1,tnt
   !write(*,*) "here:",yr,intemca(2:sny-1,t)
 
   tmp1d=0.
-  tmp1d(1:sny-1)=0.5*(intemcm(1:sny-1,t)*cos(slat(1:sny-1)*d2r)**2. &
-                     +intemcm(2:sny  ,t)*cos(slat(2:sny  )*d2r)**2.)
-  intemcm(2:sny-1,t)=(tmp1d(2:sny-1)-tmp1d(1:sny-2))/(slat(2:sny-1)-slat(1:sny-2))/a &
+  !tmp1d(1:sny-1)=0.5*(intemcm(1:sny-1,t)*cos(slat(1:sny-1)*d2r)**2. &
+  !                   +intemcm(2:sny  ,t)*cos(slat(2:sny  )*d2r)**2.)
+  !intemcm(2:sny-1,t)=(tmp1d(2:sny-1)-tmp1d(1:sny-2))/(slat(2:sny-1)-slat(1:sny-2))/a &
+  !                    /cos(slat(2:sny-1)*d2r)**2
+  tmp1d=intemcm(:,t)*cos(slat*d2r)**2.
+  intemcm(2:sny-1,t)=(tmp1d(3:sny)-tmp1d(1:sny-2))/(slat(3:sny)-slat(1:sny-2))/d2r/a &
                       /cos(slat(2:sny-1)*d2r)**2
   intemcm(1,t)=0.
   intemcm(sny,t)=0.
@@ -209,7 +215,7 @@ do t=1,tnt
   intum(:,t)=intum(:,t)/intp(:,t)
   intemca(:,t)=(intemca(:,t)+mta(:,t))/intp(:,t)
   intemcm(:,t)=(intemcm(:,t)+mtm(:,i))/intp(:,t)
- 
+
   intemca(:,t)=-intemca(:,t)*86400.
   intemcm(:,t)=-intemcm(:,t)*86400.
  
@@ -268,22 +274,22 @@ nt=121
 deallocate(tmp1d)
 allocate(tmp1d(nt))
 
-do t=1,42
-  is=(t-1)*nt+1
-  ie=t*nt
-  do j=1,10
-    tmp1d(1:121)=zp(is:ie,j)
-    dum1=sum(tmp1d(1:121),1)/real(nt)
-    dum2=sqrt(sum((tmp1d(1:121)-dum1)**2.,1)/real(nt))
-    zp(is:ie,j)=(tmp1d(1:121)-dum1)/dum2
-
-    tmp1d(1:121)=mp(is:ie,j)
-    dum1=sum(tmp1d(1:121),1)/real(nt)
-    dum2=sqrt(sum((tmp1d(1:121)-dum1)**2.,1)/real(nt))
-    mp(is:ie,j)=(tmp1d(1:121)-dum1)/dum2
-    !if (j==10) write(*,*) dum1,dum2
-  enddo
-enddo 
+!do t=1,42
+!  is=(t-1)*nt+1
+!  ie=t*nt
+!  do j=1,10
+!    tmp1d(1:121)=zp(is:ie,j)
+!    dum1=sum(tmp1d(1:121),1)/real(nt)
+!    dum2=sqrt(sum((tmp1d(1:121)-dum1)**2.,1)/real(nt))
+!    zp(is:ie,j)=(tmp1d(1:121)-dum1)/dum2
+!
+!    tmp1d(1:121)=mp(is:ie,j)
+!    dum1=sum(tmp1d(1:121),1)/real(nt)
+!    dum2=sqrt(sum((tmp1d(1:121)-dum1)**2.,1)/real(nt))
+!    mp(is:ie,j)=(tmp1d(1:121)-dum1)/dum2
+!    !if (j==10) write(*,*) dum1,dum2
+!  enddo
+!enddo 
 
 fname="./data/ERA5_z_m_data.dat"
 open(10,file=trim(fname),access="direct",recl=20)
