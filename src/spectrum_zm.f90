@@ -102,6 +102,10 @@ plan_backward=fftw_plan_dft_c2r_1d(nt,fcoe,fin,FFTW_ESTIMATE)
 
 fname="./data/ERA5_spectrum_data.dat"
 open(10,file=trim(fname),access="direct",recl=nt*34)
+
+fname="./train_data/ERA5_spectrum_data.dat"
+open(20,file=trim(fname),access="direct",recl=nt*34)
+
 n=1
 
 do t=1,42
@@ -232,6 +236,7 @@ do t=1,42
 
   !write(*,*) t,maxval(fin,1),maxloc(fin,1)
   write(10,rec=n) tmp
+  write(20,rec=n) tmp
   n=n+1
 enddo
 
@@ -240,6 +245,7 @@ call fftw_free(plan_forward)
 call fftw_free(plan_backward)
 
 close(10)
+close(20)
 
 deallocate(fin,fcoe)
 

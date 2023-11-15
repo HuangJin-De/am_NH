@@ -25,13 +25,13 @@ VPATH = src
 #a.out: remove_enso_daily.o
 #remove_enso_daily.o: remove_enso_daily.f90
 
-LIST = projection_onto_eof.f90
-a.out: projection_onto_eof.o
-projection_onto_eof.o: projection_onto_eof.f90
+#LIST = projection_onto_eof.f90
+#a.out: projection_onto_eof.o
+#projection_onto_eof.o: projection_onto_eof.f90
 
-#LIST = spectrum_zm.f90
-#a.out: spectrum_zm.o
-#spectrum_zm.o: spectrum_zm.f90
+LIST = spectrum_zm.f90
+a.out: spectrum_zm.o
+spectrum_zm.o: spectrum_zm.f90
 
 #LIST = retopy.f90
 #a.out: retopy.o
