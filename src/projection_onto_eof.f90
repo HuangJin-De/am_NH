@@ -392,6 +392,11 @@ do yr=yrs,yre
   m=m+1
   close(10)
  
+  open(10,file="./data/ERA5_crossspectrum_data.dat",access="direct",recl=2*(nt/2+1)*10)
+  write(10,rec=m) csp(:,:,1:2,yr-yrs+1)
+  m=m+1
+  close(10)
+ 
   deallocate(zk,mk,hann,fin,fcoe,zn,mn)
 enddo
 987 continue 
