@@ -391,7 +391,7 @@ do yr=yrs,yre
   write(10,rec=m) csp(:,:,:,yr-yrs+1)
   close(10)
  
-  open(10,file="./data/ERA5_crossspectrum_data.dat",access="direct",recl=2*(nt/2+1)*10)
+  open(10,file="./train_data/ERA5_crossspectrum_data.dat",access="direct",recl=2*(nt/2+1)*10)
   write(10,rec=m) csp(:,:,1:2,yr-yrs+1)
   m=m+1
   close(10)
