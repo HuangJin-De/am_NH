@@ -21,7 +21,8 @@
 
 "set tlsupp year"
 
-"set t 1 121"
+n=36 
+"set t "n*121-120" "n*121""
 "set z 1"
 
 "set grads off"

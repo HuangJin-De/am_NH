@@ -115,8 +115,8 @@ do t=1,42
   tmp=0.
 
   do m=1,10
-    zk=zp(ts:te,m)*hann
-    mk=mp(ts:te,m)*hann
+    zk=zp(ts:te,m)!*hann
+    mk=mp(ts:te,m)!*hann
 
     zm(1)=sum(zk,1)/real(nt)
     mm(1)=sum(mk,1)/real(nt)
