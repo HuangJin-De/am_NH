@@ -1,7 +1,7 @@
 # compiler
 FC = mpifort -fpp -DPURE
 DEBUG = -CB -g -traceback -check all,noarg_temp_created -debug all
-FCFLAGS = -O3 -free -mcmodel=large -heap-arrays 10 -shared-intel -fp-model precise $(DEBUG)
+FCFLAGS = -O3 -free -mcmodel=large -heap-arrays 10 -shared-intel -fp-model precise #$(DEBUG)
 FINCLUDE = -I/home/der0318/.local/include
 LDLIBS = -L/home/der0318/.local/lib -lfftw3 -lnetcdff -lnetcdf -lhdf5 -lhdf5_hl -lsz -Wl,-rpath,/home/der0318/.local/lib -L/home/der0318/.local/lib -lflapack -lfblas
 
@@ -29,13 +29,13 @@ VPATH = src
 #a.out: projection_onto_eof.o
 #projection_onto_eof.o: projection_onto_eof.f90
 
-LIST = spectrum_zm.f90
-a.out: spectrum_zm.o
-spectrum_zm.o: spectrum_zm.f90
+#LIST = spectrum_zm.f90
+#a.out: spectrum_zm.o
+#spectrum_zm.o: spectrum_zm.f90
 
-#LIST = retopy.f90
-#a.out: retopy.o
-#retopy.o: retopy.f90
+LIST = retopy.f90
+a.out: retopy.o
+retopy.o: retopy.f90
 
 #LIST = calculate_mountain_torque.f90
 #a.out: calculate_mountain_torque.o

@@ -121,6 +121,18 @@ do yr=yrs,yre
     if (ierr/=nf90_noerr) write(*,*) "close fail"
   enddo
 
+  write(fname,'(2A,I4,A)') trim(path),"/../../ERA5/MT/MT_",yr,".nc"
+
+  ierr=nf90_open(trim(fname),nf90_nowrite,ncid1)
+  if (ierr/=nf90_noerr) write(*,*) "open fail"
+  ierr=nf90_inq_varid(ncid1,'mt',varid1)
+  if (ierr/=nf90_noerr) write(*,*) "inq var fail"
+  ierr=nf90_get_var(ncid1,varid1,mt(:,:,:),start=start,count=count)
+  if (ierr/=nf90_noerr) write(*,*) "read fail"
+  ierr=nf90_close(ncid1)
+  if (ierr/=nf90_noerr) write(*,*) "close fail"
+
+
   do t=1,nt
     ua(:,:)=sum(u(:,:,:,t),1)/real(nx)
     va(:,:)=sum(v(:,:,:,t),1)/real(nx)
