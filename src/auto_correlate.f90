@@ -132,6 +132,10 @@ open(10,file="./data/auto_corr_data.dat",access="direct",recl=nt*34*42)
 write(10,rec=1) tmp 
 close(10)
 
+open(10,file="./train_data/auto_corr_data.dat",access="direct",recl=nt*34*42)
+write(10,rec=1) tmp 
+close(10)
+
 end program auto_correlate
 
 real function correlation(n,x,y)
