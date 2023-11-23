@@ -149,6 +149,8 @@ do t=1,tnt
 enddo
 close(10)
 
+!write(*,*) "mta:",mta(15,1:200)
+!write(*,*) "mtm",mtm(15,1:200)
 
 allocate(score(sny,10))
 

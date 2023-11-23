@@ -24,7 +24,7 @@ integer, dimension(:), allocatable :: mpi_s, mpi_n
 real, dimension(:,:,:), allocatable :: sp,mt
 real, dimension(:,:), allocatable :: time_bnds
 real, dimension(nx,ny) :: topo,dtopo
-real :: lats,late
+real :: lats,late,dlon 
 real :: dum1,dum2,dum3,dum4,dum5
 character(200) :: path,fname,tdum1,tdum2
 
@@ -79,16 +79,16 @@ if (ierr/=nf90_noerr) write(*,*) "close fail"
 topo=topo*dum1+dum2
 topo=topo/grav
 
+dlon=(lon(2)-lon(1))*d2r
 do j=1,ny
 do i=1,nx
   is=i-1
   ie=i+1
   if (is<1) is=is+nx
   if (ie>nx) ie=ie-nx
-  dtopo(i,j)=(topo(ie,j)-topo(is,j))/((lon(ie)-lon(is))*cos(lat(j)*d2r))
+  dtopo(i,j)=(topo(ie,j)-topo(is,j))/(dlon*cos(lat(j)*d2r))
 enddo
 enddo
-
 
 do yr=ts,te
   mo_da=(/ 31,28,31,30,31,30,31,31,30,31,30,31 /)

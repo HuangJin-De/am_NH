@@ -33,13 +33,13 @@ VPATH = src
 #a.out: spectrum_zm.o
 #spectrum_zm.o: spectrum_zm.f90
 
-LIST = auto_correlate.f90
-a.out: auto_correlate.o
-auto_correlate.o: auto_correlate.f90
+#LIST = auto_correlate.f90
+#a.out: auto_correlate.o
+#auto_correlate.o: auto_correlate.f90
 
-#LIST = retopy.f90
-#a.out: retopy.o
-#retopy.o: retopy.f90
+LIST = retopy.f90
+a.out: retopy.o
+retopy.o: retopy.f90
 
 #LIST = calculate_mountain_torque.f90
 #a.out: calculate_mountain_torque.o
