@@ -37,13 +37,13 @@ VPATH = src
 #a.out: auto_correlate.o
 #auto_correlate.o: auto_correlate.f90
 
-LIST = retopy.f90
-a.out: retopy.o
-retopy.o: retopy.f90
+#LIST = retopy.f90
+#a.out: retopy.o
+#retopy.o: retopy.f90
 
-#LIST = calculate_mountain_torque.f90
-#a.out: calculate_mountain_torque.o
-#calculate_mountain_torque.o: calculate_mountain_torque.f90
+LIST = calculate_mountain_torque.f90
+a.out: calculate_mountain_torque.o
+calculate_mountain_torque.o: calculate_mountain_torque.f90
 
 #LIST =  pca_analysis.f90 forpca.f90 forsvd.f90 foreig.f90 kinds.f90
 #a.out: pca_analysis.o

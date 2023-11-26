@@ -79,7 +79,7 @@ if (ierr/=nf90_noerr) write(*,*) "close fail"
 topo=topo*dum1+dum2
 topo=topo/grav
 
-dlon=(lon(2)-lon(1))*d2r
+dlon=2*(lon(2)-lon(1))*d2r
 do j=1,ny
 do i=1,nx
   is=i-1
