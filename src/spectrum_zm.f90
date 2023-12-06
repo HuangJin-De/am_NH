@@ -65,7 +65,7 @@ tnt=0
 do yr=yrs,yre
   mo_da=(/ 31,28,31,30,31,30,31,31,30,31,30,31 /)
   !if (mod(yr,4)==0) mo_da(2)=mo_da(2)+1
-  tnt=tnt+sum(mo_da(1:3),1)+mo_da(12)
+  tnt=tnt+sum(mo_da(1:3),1)+mo_da(12)+20
   if (yr==yrs) tnt=tnt-sum(mo_da(1:3),1)
   if (yr==yre) tnt=tnt-mo_da(12)
 enddo
@@ -109,8 +109,8 @@ open(20,file=trim(fname),access="direct",recl=nt*34)
 n=1
 
 do t=1,42
-  ts=(t-1)*nt+1
-  te=t*nt
+  ts=(t-1)*141+1+10
+  te=t*141-10
 
   tmp=0.
 

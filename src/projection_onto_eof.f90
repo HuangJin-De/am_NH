@@ -74,7 +74,7 @@ tnt=0
 do yr=yrs,yre
   mo_da=(/ 31,28,31,30,31,30,31,31,30,31,30,31 /)
   !if (mod(yr,4)==0) mo_da(2)=mo_da(2)+1
-  tnt=tnt+sum(mo_da(1:3),1)+mo_da(12)
+  tnt=tnt+sum(mo_da(1:3),1)+mo_da(12)+20
   if (yr==yrs) tnt=tnt-sum(mo_da(1:3),1)
   if (yr==yre) tnt=tnt-mo_da(12)
 enddo
@@ -93,43 +93,47 @@ do yr=yrs,yre
 
   if (yr==yrs) then
     i=n
-    j=n+sum(mo_da(12:12),1)
-    tmask(i:j-1)=1
+    j=n+sum(mo_da(12:12),1)+10
+    tmask(i+10:j-1)=1
     tyear(i:j-1)=yr
-    do k=sum(mo_da(1:11),1)+1,nt
-      tjul(i+k-sum(mo_da(1:11),1)-1)=k
+    do k=sum(mo_da(1:11),1)+1-10,nt
+      tjul(i+k-sum(mo_da(1:11),1)-1+10)=k
     enddo
     n=j
   elseif (yr==yre) then
     i=n
-    j=n+sum(mo_da(1:3),1)
-    tmask(i:j-1)=1
+    j=n+sum(mo_da(1:3),1)+10
+    tmask(i:j-1-10)=1
     tyear(i:j-1)=yr-1
-    do k=1,sum(mo_da(1:3),1)
+    do k=1,sum(mo_da(1:3),1)+10
       tjul(i+k-1)=k
     enddo
     n=j
   else
     i=n
-    j=n+sum(mo_da(1:3),1)
-    tmask(i:j-1)=1
+    j=n+sum(mo_da(1:3),1)+10
+    tmask(i:j-1-10)=1
     tyear(i:j-1)=yr-1
-    do k=1,sum(mo_da(1:3),1)
+    do k=1,sum(mo_da(1:3),1)+10
       tjul(i+k-1)=k
     enddo
     n=j
 
     i=n
-    j=n+sum(mo_da(12:12),1)
-    tmask(i:j-1)=1
+    j=n+sum(mo_da(12:12),1)+10
+    tmask(i+10:j-1)=1
     tyear(i:j-1)=yr
-    do k=sum(mo_da(1:11),1)+1,nt
-      tjul(i+k-sum(mo_da(1:11),1)-1)=k
+    do k=sum(mo_da(1:11),1)+1-10,nt
+      tjul(i+k-sum(mo_da(1:11),1)-1+10)=k
     enddo
     n=j
   endif
 enddo
 
+!do t=1,282
+!  write(*,*) t,tyear(t),tjul(t),tmask(t)
+!enddo
+!stop
 
 allocate(um(sny,nz,365),vm(sny,nz,365),emcm(sny,nz,365),mtm(sny,365))
 
@@ -224,11 +228,11 @@ do t=1,tnt
   intua(:,t)=(intua(:,t)-intum(:,t))
   intemca(:,t)=(intemca(:,t)-intemcm(:,t))
 
-  if (mod(t,121)==0) then
-    open(10,file="./data/int_data.dat",access="direct",recl=sny*3*121)
-    write(10,rec=m) intua(:,t-120:t)+intum(:,t-120:t) &
-                   ,intemca(:,t-120:t)+intemcm(:,t-120:t) &
-                   ,intp(:,t-120:t)
+  if (mod(t,141)==0) then
+    open(10,file="./data/int_data.dat",access="direct",recl=sny*3*141)
+    write(10,rec=m) intua(:,t-140:t) &!+intum(:,t-140:t) &
+                   ,intemca(:,t-140:t) &!+intemcm(:,t-140:t) &
+                   ,intp(:,t-140:t)
                  
     m=m+1
     close(10)
@@ -272,9 +276,9 @@ do t=1,tnt
 enddo
 close(10)
 
-nt=121
-deallocate(tmp1d)
-allocate(tmp1d(nt))
+!nt=121
+!deallocate(tmp1d)
+!allocate(tmp1d(nt))
 
 !do t=1,42
 !  is=(t-1)*nt+1
@@ -293,6 +297,32 @@ allocate(tmp1d(nt))
 !  enddo
 !enddo 
 
+nt=141
+deallocate(tmp1d)
+allocate(tmp1d(nt))
+
+do m=1,10
+do t=1,42
+  i=(t-1)*nt+1
+  j=t*nt
+  tmp1d=zp(i:j,m)
+  !do k=1+1,nt-1
+  !  zp(k,m)=0.25*tmp1d(k-1)+0.5*tmp1d(k)+0.25*tmp1d(k+1)
+  !enddo
+  do k=1+10,nt-10
+    zp(k,m)=sum(tmp1d(k-10:k+10))/21.
+  enddo
+  tmp1d=mp(i:j,m)
+  !do k=1+1,nt-1
+  !  mp(k,m)=0.25*tmp1d(k-1)+0.5*tmp1d(k)+0.25*tmp1d(k+1)
+  !enddo
+  do k=1+10,nt-10
+    mp(k,m)=sum(tmp1d(k-10:k+10))/21.
+  enddo
+enddo
+enddo
+
+
 fname="./data/ERA5_z_m_data.dat"
 open(10,file=trim(fname),access="direct",recl=20)
 do t=1,tnt
@@ -301,6 +331,8 @@ enddo
 close(10)
 
 
+
+nt=121
 allocate(csp(61,10,6,42))
 m=1
 do yr=yrs,yre

@@ -64,18 +64,18 @@ do yr=yrs,yre
   nt=sum(mo_da,1)
 
   if (yr==yrs) then
-    i=n-1+sum(mo_da(1:11),1)+1
+    i=n-1+sum(mo_da(1:11),1)+1-10
     j=n-1+nt
     tmask(i:j)=1 
   elseif (yr==yre) then
     i=n-1+1
-    j=n-1+sum(mo_da(1:3),1)
+    j=n-1+sum(mo_da(1:3),1)+10
     tmask(i:j)=1
   else
     i=n-1+1
-    j=n-1+sum(mo_da(1:3),1)
+    j=n-1+sum(mo_da(1:3),1)+10
     tmask(i:j)=1
-    i=n-1+sum(mo_da(1:11),1)+1
+    i=n-1+sum(mo_da(1:11),1)+1-10
     j=n-1+nt
     tmask(i:j)=1 
   endif

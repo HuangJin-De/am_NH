@@ -234,12 +234,12 @@ do t=1,tnt
 enddo
 
 
-!fname=trim(path)//"/data/ERA5_month_spectrum_mean.dat"
-!open(10,file=trim(fname),access="direct",recl=sny*nz)
-!do i=1,12
-!  write(10,rec=i) um(:,:,i)
-!enddo
-!close(10)
+fname=trim(path)//"/data/ERA5_month_spectrum_mean.dat"
+open(10,file=trim(fname),access="direct",recl=sny*nz)
+do i=1,12
+  write(10,rec=i) um(:,:,i)
+enddo
+close(10)
 
 fname=trim(path)//"/data/ERA5_month_reg_mei.dat"
 open(10,file=trim(fname),access="direct",recl=sny*nz*2+sny)
